@@ -1,0 +1,49 @@
+{
+  "project_info": {
+    "project_number": "559283079409",
+    "firebase_url": "https://tubes-f54cb-default-rtdb.firebaseio.com",
+    "project_id": "tubes-f54cb",
+    "storage_bucket": "tubes-f54cb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:559283079409:android:282fa784ae32ff178d0150",
+        "android_client_info": {
+          "package_name": "com.example.tubescoba"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBOQ2fwUjT5s_fA7Y1Et72GviXeP03yg20"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:559283079409:android:b96e95d2442859c78d0150",
+        "android_client_info": {
+          "package_name": "com.example.tubesuser"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBOQ2fwUjT5s_fA7Y1Et72GviXeP03yg20"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
