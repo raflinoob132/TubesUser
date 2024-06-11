@@ -1,19 +1,13 @@
 package com.example.tubesuser
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.*
 
 class UserActivity : AppCompatActivity() {
 
@@ -25,6 +19,7 @@ class UserActivity : AppCompatActivity() {
     private lateinit var drinkAdapter: MenuAdapter
     private lateinit var recommendedFoods: MutableList<FoodModel>
     private lateinit var recommendedDrinks: MutableList<FoodModel>
+    private lateinit var buttonViewCart:Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,6 +32,7 @@ class UserActivity : AppCompatActivity() {
         recyclerViewRecommendedDrinks = findViewById(R.id.recyclerViewRecommendedDrinks)
         val buttonViewAllFoods: Button = findViewById(R.id.buttonViewAllFoods)
         val buttonViewAllDrinks: Button = findViewById(R.id.buttonViewAllDrinks)
+        buttonViewCart=findViewById(R.id.buttonViewCart)
 
         recyclerViewRecommendedFoods.layoutManager = LinearLayoutManager(this)
         recyclerViewRecommendedDrinks.layoutManager = LinearLayoutManager(this)
@@ -44,8 +40,39 @@ class UserActivity : AppCompatActivity() {
         recommendedFoods = mutableListOf()
         recommendedDrinks = mutableListOf()
 
-        foodAdapter = MenuAdapter(recommendedFoods)
-        drinkAdapter = MenuAdapter(recommendedDrinks)
+        foodAdapter = MenuAdapter(this, recommendedFoods)
+        foodAdapter.setOnItemClickCallback(object : MenuAdapter.OnItemClickCallback{
+            override fun onItemClicked(data: FoodModel) {
+                val bundle = Bundle().apply {
+                    putString("id", data.id)
+                    putString("name", data.name)
+                    putString("description", data.description)
+                    putString("price", data.price.toString())
+                }
+                Intent(this@UserActivity, FoodDetailActivity::class.java).also {
+                    it.putExtra(FoodDetailActivity.DATA,bundle)
+                    startActivity(it)
+                }
+            }
+
+        })
+
+        drinkAdapter = MenuAdapter(this, recommendedDrinks)
+        foodAdapter.setOnItemClickCallback(object : MenuAdapter.OnItemClickCallback{
+            override fun onItemClicked(data: FoodModel) {
+                val bundle = Bundle().apply {
+                    putString("id", data.id)
+                    putString("name", data.name)
+                    putString("description", data.description)
+                    putString("price", data.price.toString())
+                }
+                Intent(this@UserActivity, FoodDetailActivity::class.java).also {
+                    it.putExtra(FoodDetailActivity.DATA,bundle)
+                    startActivity(it)
+                }
+            }
+
+        })
 
         recyclerViewRecommendedFoods.adapter = foodAdapter
         recyclerViewRecommendedDrinks.adapter = drinkAdapter
@@ -54,17 +81,22 @@ class UserActivity : AppCompatActivity() {
         loadRecommendedDrinks()
 
         buttonViewAllFoods.setOnClickListener {
-            // Implement view all foods functionality
+            val intent = Intent(this, ViewAllFoodsActivity::class.java)
+            startActivity(intent)
         }
 
         buttonViewAllDrinks.setOnClickListener {
-            // Implement view all drinks functionality
+            val intent = Intent(this, ViewAllDrinksActivity::class.java)
+            startActivity(intent)
+        }
+        buttonViewCart.setOnClickListener{
+            val intent = Intent(this, ViewCartActivity::class.java)
+            startActivity(intent)
         }
     }
 
     private fun loadRecommendedFoods() {
-        dbRefFoods.orderByChild("recommended").equalTo(true).addValueEventListener(object :
-            ValueEventListener {
+        dbRefFoods.orderByChild("recommended").equalTo(true).addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 recommendedFoods.clear()
                 for (foodSnapshot in snapshot.children) {

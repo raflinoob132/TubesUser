@@ -13,6 +13,18 @@
         android:theme="@style/Theme.TubesUser"
         tools:targetApi="31">
         <activity
+            android:name=".ViewCartActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ViewAllDrinksActivity"
+            android:exported="false" />
+        <activity
+            android:name=".FoodDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ViewAllFoodsActivity"
+            android:exported="false" />
+        <activity
             android:name=".UserActivity"
             android:exported="false" />
         <activity

@@ -1,0 +1,38 @@
+<!-- activity_view_cart.xml -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <EditText
+        android:id="@+id/editTextCustomerName"
+        android:layout_width="381dp"
+        android:layout_height="59dp"
+        android:layout_marginBottom="16dp"
+        android:hint="Enter your name"
+        android:padding="8dp" />
+
+    <TextView
+        android:id="@+id/textViewTotalPrice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Total Price: $0.00"
+        android:textSize="18sp"
+        android:padding="8dp"
+        android:layout_marginBottom="16dp"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewCart"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+    <Button
+        android:id="@+id/buttonPlaceOrder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Place Order"
+        android:padding="16dp"/>
+
+</LinearLayout>

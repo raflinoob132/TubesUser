@@ -1,8 +1,9 @@
 package com.example.tubesuser
 
 data class FoodModel(
-    val name: String? = null,
-    val description: String? = null,
-    val price: Double? = null,
-    val recommended: Boolean? = null
+    var id: String? =null,
+    var name: String? = null,
+    var description: String? = null,
+    var price: Double? = null,
+    var recommended: Boolean? = null
 )
